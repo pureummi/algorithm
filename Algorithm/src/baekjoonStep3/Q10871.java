@@ -16,10 +16,10 @@ public class Q10871 {
 		int n = Integer.parseInt(str.nextToken());
 		int x = Integer.parseInt(str.nextToken());
 
-		StringTokenizer strX = new StringTokenizer(br.readLine());
+		str = new StringTokenizer(br.readLine());
 		int[] array = new int[n];
 		for(int i = 0; i < n; i++) {
-			array[i] = Integer.parseInt(strX.nextToken());
+			array[i] = Integer.parseInt(str.nextToken());
 		}
 		
 		for(int j = 0; j < array.length; j++) {
