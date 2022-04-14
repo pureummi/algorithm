@@ -12,19 +12,12 @@ public class Q2869 {
 		int a = Integer.parseInt(str.nextToken());
 		int b = Integer.parseInt(str.nextToken());
 		int v = Integer.parseInt(str.nextToken());
-		int day = 0, height = 0;
-		boolean check = false;
-		while (!check) {
-			height = height + a;
-			
-			if (height < v) {
-				height = height - b;				
-				day++;
-			} else if (height >= v) {
-				day++;
-				check = true;
-			}
+		int day = (v - b)/(a - b);
+		
+		if ((v - b)%(a - b) != 0) {
+			day = day + 1;
 		}
+		
 		System.out.println(day);
 		br.close();
 	}
