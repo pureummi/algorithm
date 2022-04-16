@@ -16,20 +16,18 @@ public class Q2775 {
 			
 			int[][] room = new int[k+1][n];
 
-			for (int j = 0; j <= k; j++) {//Ãþ
-				int cnt = 0;
-				
-				for (int m = 0; m <= n-1; m++) {//È£
-					cnt++;
-					room[j][m] = cnt;
-					room[j][0] = 1;
-					int temp = 0;
-					if (j > 0) {
-						for (int o = m; o >= 0; o--) {
-							temp += room[j-1][o];
+			for (int x = 0; x <= k; x++) {//Ãþ
+				for (int y = 0; y <= n-1; y++) {//È£
+					if (x == 0) {
+						room[x][y] = y + 1;
+						
+					} else if (x > 0) {
+						int temp = 0;
+						for (int o = y; o >= 0; o--) {
+							temp += room[x-1][o];
 						}
 						
-						room[j][m] = temp;
+						room[x][y] = temp;
 					}
 				}
 			}
@@ -40,5 +38,7 @@ public class Q2775 {
 		for (int i : result) {
 			System.out.println(i);
 		}
+		
+		br.close();
 	}
 }
