@@ -13,22 +13,22 @@ public class Q1929 {
 		int m = Integer.parseInt(str.nextToken());
 		int n = Integer.parseInt(str.nextToken());
 		
+		boolean[] check = new boolean[n+1];
+		check[0] = check[1] = false;
+		
+		for (int i = 2; i <= n; i++) {
+			check[i] = true;
+ 		}
+		
+		for (int i = 2; i <= n; i++) {
+			if (!check[i]) continue;
+			for (int j = i * 2; j <= n; j += i) {
+				check[j] = false;
+			}
+		}
+		
 		for (int i = m; i <= n; i++) {
-			int[] cnt = new int[n];
-			for (int k = 1; k <= i; k++) {
-				if (i % k == 0) {
-					cnt[k-1] = i / k;
-				} 
-			}
-			
-			int zero = 0;
-			for (int l = 0; l < cnt.length; l++) {
-				if (cnt[l] == 0) {
-					zero++;
-				}
-			}
-			
-			if (cnt.length - zero == 2) {
+			if (check[i]) {
 				System.out.println(i);
 			}
 		}
