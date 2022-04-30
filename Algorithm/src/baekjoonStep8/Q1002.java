@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Q1002 {
+public class Q1002 {//두 원의 교점의 개수를 구하는 문제
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -24,24 +24,46 @@ public class Q1002 {
 			int y2 = Integer.parseInt(str.nextToken());
 			int r2 = Integer.parseInt(str.nextToken());
 
-			//Math.abs(x-x1) + Math.abs(y-y1) = r1
-			//Math.abs(x-x2) + Math.abs(y-y2) = r2
-			int cnt = 0;
-			for (int j = -10000; j <= 10000; j++) {
-				int x = j;
-				for (int k = -10000; k <= 10000; k++) {
-					int y = k;
-					if (Math.abs(x-x1) + Math.abs(y-y1) == r1 && Math.abs(x-x2) + Math.abs(y-y2) == r2) {
-						cnt++;
-					}
-				}
-			}
-			
-			sb.append(cnt + "\n");
+			sb.append(intersection_point(x1, y1, r1, x2, y2, r2) + "\n");
 		}
 		
 		System.out.println(sb.toString());
 		
 		br.close();
+	}
+	
+	public static int intersection_point(int x1, int y1, int r1, int x2, int y2, int r2) {
+		int cnt = 0;
+		
+		//두 원이 같을 때 : 무한대
+		if (x1 == x2 && y1 == y2 && r1 == r2) {
+			cnt = -1;
+		
+		} 
+		//하나의 원이 다른 하나의 원 안에 있으나 접점이 없을 때 : 0개
+		else if (Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2) < Math.pow(r2-r1, 2)) { 
+			cnt = 0;
+			
+		}
+		//두 접점 사이의 거리가 두 원의 반지름의 합보다 클 때 : 0개
+		else if (Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2) > Math.pow(r2+r1, 2)) { 
+			cnt = 0;
+			
+		}
+		//내접할 때 : 1개
+		else if (Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2) == Math.pow(r2-r1, 2)) { 
+			cnt = 1;
+			
+		}
+		//외접할 때 : 1개
+		else if (Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2) == Math.pow(r2+r1, 2)) { 
+			cnt = 1;
+			
+		} 
+		else {
+			cnt = 2;
+		}
+		
+		return cnt;
 	}
 }
