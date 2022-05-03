@@ -15,7 +15,7 @@ public class Q17478 {
 		br.close();
 	}
 	
-	public static String underbar = "";
+	static String underbar = "";
 	public static void funcRecursion(int n) {
 		String line = underbar;
 		
