@@ -13,24 +13,26 @@ public class Q7568 {
 
 		int[] weight = new int[n];
 		int[] height = new int[n];
-		int topWeight = 0, topHeight = 0;
 		for (int i = 0; i < n; i++) {
 			StringTokenizer str = new StringTokenizer(br.readLine());
 			weight[i] = Integer.parseInt(str.nextToken());
 			height[i] = Integer.parseInt(str.nextToken());
-			topWeight = Math.max(weight[i], topWeight);
-			topHeight = Math.max(height[i], topHeight);
 		}
 
+		StringBuilder sb = new StringBuilder();
+		
 		for (int i = 0; i < n; i++) {
-			for (int j = i+1; j < n; j++) {
-				
+			int rank = 1;
+			for (int j = 0; j < n; j++) {
+				if (weight[i] < weight[j] && height[i] < height[j]) {
+					rank++;
+				}
 			}
+			sb.append(rank + " ");
 		}
 		
-		System.out.println(topWeight);
-		System.out.println(topHeight);
-
-
+		System.out.println(sb.substring(0, sb.length()-1));
+		
+		br.close();
 	}
 }

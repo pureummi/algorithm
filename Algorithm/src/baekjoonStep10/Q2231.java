@@ -13,12 +13,9 @@ public class Q2231 {
 		String copy = String.valueOf(n);
 		int min = 0;
 		while (!copy.equals("0")) {//copy가 0이 될 때까지 반복
-			int[] array = new int[copy.length()];
-			
 			int sum = 0;
-			for (int i = 0; i < array.length; i++) {
-				array[i] = copy.charAt(i) - '0';
-				sum += array[i];
+			for (int i = 0; i < copy.length(); i++) {
+				sum += copy.charAt(i) - '0';
 			}
 		
 			if (sum + Integer.parseInt(copy) == n) {
@@ -26,7 +23,6 @@ public class Q2231 {
 			} 
 			
 			copy = String.valueOf(Integer.parseInt(copy) - 1); //copy 1씩 감소
-			
 		}
 		
 		System.out.println(min);
