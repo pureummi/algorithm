@@ -19,28 +19,44 @@ public class Q1018 {
 			board[i] = br.readLine().toCharArray();
 		}
 
-		//w : 32, b : 32
-		int w = 0;
-		int b = 0;
-		for (int i = 0; i < n; i++) {
-			for (int j = 0; j < m; j++) {
-				if (i % 2 == 0 && j % 2 == 0) {
-					if (board[i][j] == 'W') {
-						w++;
-					} else if (board[i][j] == 'B') {
-						b++;
+		int row = n;
+		int column = m;
+		while (row-8 >= 0 && column-8 >= 0) {
+			//w : 32, b : 32
+			int w1 = 0;
+			int b1 = 0;
+			int w2 = 0;
+			int b2 = 0;
+
+			for (int i = row-1; i >= row-8; i--) {
+				for (int j = column-1; j >= column-8; j--) {
+					
+					if ((i % 2 == 0 && j % 2 == 0) ||
+							(i % 2 != 0 && j % 2 != 0)) {
+						if (board[i][j] == 'W') {
+							w1++;
+						} else if (board[i][j] == 'B') {
+							b2++;
+						}
 					}
-				} else if (i % 2 != 0 && j % 2 != 0) {
-					if (board[i][j] == 'W') {
-						w++;
-					} else if (board[i][j] == 'B') {
-						b++;
-					}
+					
+					if ((i % 2 == 0 && j % 2 != 0) ||
+							(i % 2 != 0 && j % 2 == 0)) {
+						if (board[i][j] == 'W') {
+							w2++;
+						} else if (board[i][j] == 'B') {
+							b1++;
+						}
+					} 
 				}
 			}
-		}
-		System.out.println("w : " + w + ", b : " + b);
 
+			System.out.println("w1 : " + w1 + ", b1 : " + b1);
+			System.out.println("w2 : " + w2 + ", b2 : " + b2);
+			row--;
+			column--;
+		}
+		
 		br.close();
 	}
 }
