@@ -3,7 +3,6 @@ package baekjoon.step11;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 
 public class Q2750 {
 	public static void main(String[] args) throws IOException {
@@ -16,16 +15,15 @@ public class Q2750 {
 			array[i] = Integer.parseInt(br.readLine());
 		}
 		
-		for (int i = 1; i < n; i++) {
-			int target = array[i];
-			int j = i - 1;
-			
-			while (j >= 0 && array[j] > target) {
-				array[j+1] = array[j];
-				j--;
+		int temp = 0;
+		for (int i = 0; i < array.length; i++) {
+			for (int j = 0; j < array.length-1; j++) {
+				if (array[j] > array[j+1]) {
+					temp = array[j];
+					array[j] = array[j+1];
+					array[j+1] = temp;
+				}
 			}
-			
-			array[j+1] = target;
 		}
 		
 		for (int i : array) {
