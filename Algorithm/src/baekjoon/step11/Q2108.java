@@ -3,11 +3,7 @@ package baekjoon.step11;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 public class Q2108 {
 	public static void main(String[] args) throws IOException {
@@ -36,8 +32,6 @@ public class Q2108 {
 				}
 				cntMax = Math.max(cntMax, cnt[i]);
 			}
-			System.out.println("array : " + Arrays.toString(array));
-			//System.out.println("cnt : " + Arrays.toString(cnt));
 			
 			int cntCheck = 0;
 			for (int i = 0; i < array.length; i++) {
@@ -45,17 +39,15 @@ public class Q2108 {
 					cntCheck++;
 				}
 			}
-			//System.out.println("cntCheck : " + cntCheck);
+			
 			if (cntCheck > 0) {
 				int[] cntResult = new int[cntCheck];
 				for (int i = 0; i < array.length; i++) {
-					
 					if (cnt[i] == cntMax) {
 						cntResult[cntCheck-1] = array[i];
 						cntCheck--;
 					}
 				}
-				//System.out.println("cntResult : " + Arrays.toString(cntResult));
 				
 				if (cntResult.length-2 >= 0) {
 					frequency = cntResult[cntResult.length-2];
@@ -71,7 +63,8 @@ public class Q2108 {
 		
 		int avg = 0;
 		if ((sum % array.length) != 0) {
-			if (((sum % array.length) * 10)/array.length >= 5) {
+			if (((sum % array.length) * 10)/array.length >= 5
+					|| ((sum % array.length) * 10)/array.length <= -5) {
 				if (sum > 0) {
 					avg = sum/array.length + 1;
 			
@@ -87,13 +80,12 @@ public class Q2108 {
 			avg = sum/array.length;
 		}
 
-		System.out.println("(sum % array.length) * 10 : " + ((sum % array.length) * 10));
 		StringBuilder sb = new StringBuilder(); 
 		//산술평균
 		sb.append(avg + "\n"); 
-		//중앙값 Arrays.sort(array);
+		//중앙값 
 		sb.append(array[array.length/2] + "\n"); 
-		//최빈값. 여러 개일 경우, 두번 째로 작은 값
+		//최빈값. 여러 개일 경우, 두 번째로 작은 값
 		sb.append(frequency + "\n");
 		//범위. 최댓값과 최솟값의 차이
 		sb.append(array[array.length-1]-array[0]);
