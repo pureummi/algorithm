@@ -3,7 +3,6 @@ package baekjoon.step11;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 
 public class Q2108 {
 	public static void main(String[] args) throws IOException {
@@ -11,87 +10,52 @@ public class Q2108 {
 
 		int n = Integer.parseInt(br.readLine());
 
-		int[] array = new int[n];
+		//n의 절댓값이 4000을 넘지 않아야함. -4000~4000 
+		int[] array = new int[8001];
+		
 		int sum = 0;
+		int max = Integer.MIN_VALUE; //최댓값
+		int min = Integer.MAX_VALUE; //최솟값
+		int median = 4001; //중앙값
+		int mode = 4001; //최빈값
+		
 		for (int i = 0; i < n; i++) {
-			array[i] = Integer.parseInt(br.readLine());
-			sum += array[i];
+			int value = Integer.parseInt(br.readLine());
+			sum += value;
+			array[value + 4000]++;
+			
+			if (max < value) max = value;
+			if (min > value) min = value;
 		}
-
-		Arrays.sort(array);
-
-		int frequency = 0;
-		if (n > 1) {
-			int[] cnt = new int[array.length];
-			int cntMax = 0;
-			for (int i = 0; i < array.length; i++) {
-				for (int j = i+1; j < array.length; j++) {
-					if (array[i] == array[j]) {
-						cnt[i]++;
-					}
-				}
-				cntMax = Math.max(cntMax, cnt[i]);
-			}
-			
-			int cntCheck = 0;
-			for (int i = 0; i < array.length; i++) {
-				if (cnt[i] == cntMax) {
-					cntCheck++;
-				}
-			}
-			
-			if (cntCheck > 0) {
-				int[] cntResult = new int[cntCheck];
-				for (int i = 0; i < array.length; i++) {
-					if (cnt[i] == cntMax) {
-						cntResult[cntCheck-1] = array[i];
-						cntCheck--;
-					}
+		
+		int cnt = 0;
+		int modeMax = 0; //최빈값의 최댓값
+		boolean check = false;
+		
+		for (int i = min+4000; i <= max+4000; i++) {
+			if (array[i] > 0) {
+				if (cnt < (n+1)/2) {
+					cnt += array[i];
+					median = i - 4000;
 				}
 				
-				if (cntResult.length-2 >= 0) {
-					frequency = cntResult[cntResult.length-2];
-				
-				} else {
-					frequency = cntResult[0];
+				if (modeMax < array[i]) {
+					modeMax = array[i];
+					mode = i - 4000;
+					check = true;
+					
+				} else if (modeMax == array[i] && check == true) {
+					mode = i - 4000;
+					check = false;
 				}
 			}
-		
-		} else if (n == 1) {
-			frequency = array[array.length-1];
 		}
 		
-		int avg = 0;
-		if ((sum % array.length) != 0) {
-			if (((sum % array.length) * 10)/array.length >= 5
-					|| ((sum % array.length) * 10)/array.length <= -5) {
-				if (sum > 0) {
-					avg = sum/array.length + 1;
-			
-				} else {
-					avg = sum/array.length - 1;
-				}
-			
-			} else {
-				avg = sum/array.length;
-			}
-			
-		} else {
-			avg = sum/array.length;
-		}
+		System.out.println((int)Math.round((double)sum/n));
+		System.out.println(median);
+		System.out.println(mode);
+		System.out.println(max-min);
 
-		StringBuilder sb = new StringBuilder(); 
-		//산술평균
-		sb.append(avg + "\n"); 
-		//중앙값 
-		sb.append(array[array.length/2] + "\n"); 
-		//최빈값. 여러 개일 경우, 두 번째로 작은 값
-		sb.append(frequency + "\n");
-		//범위. 최댓값과 최솟값의 차이
-		sb.append(array[array.length-1]-array[0]);
-		
-		System.out.println(sb);
-		
 		br.close();
 	}
 }
