@@ -8,59 +8,62 @@ import java.util.StringTokenizer;
 public class Q11650 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
+
 		int n = Integer.parseInt(br.readLine());
-		
+
 		String[] xy = new String[n];
-	
+
 		int[] x = new int[n];
 		int[] y = new int[n];
-		
- 		for (int i = 0; i < n; i++) {
+
+		for (int i = 0; i < n; i++) {
 			xy[i] = br.readLine();
 			StringTokenizer str = new StringTokenizer(xy[i]);
- 			x[i] = Integer.parseInt(str.nextToken());
- 			y[i] = Integer.parseInt(str.nextToken());
+			x[i] = Integer.parseInt(str.nextToken());
+			y[i] = Integer.parseInt(str.nextToken());
 		}
- 		
- 		//x값을 기준으로 정렬
- 		for (int i = 1; i < n; i++) {
- 			int targetX = x[i];
- 			int targetY = y[i];
- 			String targetXY = xy[i];
- 			int j = i-1;
- 			
- 			while (j >= 0 && x[j] > targetX) {
- 				x[j+1] = x[j];
- 				y[j+1] = y[j];
- 				xy[j+1] = xy[j];
- 				j--;
- 			}
- 			
- 			x[j+1] = targetX;
- 			y[j+1] = targetY;
- 			xy[j+1] = targetXY;
- 		}
- 		
- 		//x의 값이 같을 때, y값을 기준으로 정렬
- 		for (int i = 1; i < n; i++) {
- 			int targetX = x[i];
- 			int targetY = y[i];
- 			String targetXY = xy[i];
- 			int j = i-1;
- 			
- 			while (j >= 0 && targetX == x[j] && y[j] > targetY) {
- 				xy[j+1] = xy[j];
- 				j--;
- 			}
- 			
- 			xy[j+1] = targetXY;
- 		}
- 		
- 		for (String s : xy) {
- 			System.out.println(s);
- 		}
- 		
- 		br.close();
+
+		int tempX = 0;
+		int tempY = 0;
+		String tempXY = "0";
+		//x값을 기준으로 정렬
+		for (int i = 0; i < x.length-1; i++) {
+			for (int j = 1; j < x.length-i; j++) {
+				if (x[j-1] > x[j]) {
+					tempX = x[j-1];
+					x[j-1] = x[j];
+					x[j] = tempX;
+					
+					tempY = y[j-1];
+					y[j-1] = y[j];
+					y[j] = tempY;
+					
+					tempXY = xy[j-1];
+					xy[j-1] = xy[j];
+					xy[j] = tempXY;
+				}
+			}
+		}
+
+		//x값이 같을 때, y값을 기준으로 정렬
+		for (int i = 0; i < y.length-1; i++) {
+			for (int j = 1; j < y.length-i; j++) {
+				if (x[j-1] == x[j] && y[j-1] > y[j]) {
+					tempY = y[j-1];
+					y[j-1] = y[j];
+					y[j] = tempY;
+					
+					tempXY = xy[j-1];
+					xy[j-1] = xy[j];
+					xy[j] = tempXY;
+				}
+			}
+		}
+
+		for (String s : xy) {
+			System.out.println(s);
+		}
+
+		br.close();
 	}
 }
