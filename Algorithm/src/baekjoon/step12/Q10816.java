@@ -11,38 +11,25 @@ public class Q10816 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		int n = Integer.parseInt(br.readLine());
-		int[] card = new int[n];
 		
 		StringTokenizer str = new StringTokenizer(br.readLine());
 		
+		HashMap<Integer, Integer> hashmap = new HashMap<Integer, Integer>();
+
 		for (int i = 0; i < n; i++) {
-			card[i] = Integer.parseInt(str.nextToken());
+			int card = Integer.parseInt(str.nextToken());
+			hashmap.put(card, hashmap.getOrDefault(card, 0) + 1);
 		}
 		
 		int m = Integer.parseInt(br.readLine());
-		int[] check = new int[m];
 
 		str = new StringTokenizer(br.readLine());
 		
-		HashMap<Integer, Integer> hashmap = new HashMap<Integer, Integer>();
-		
-		for (int i = 0; i < m; i++) {
-			check[i] = Integer.parseInt(str.nextToken());
-			hashmap.put(check[i], 0);
-		}
-		
 		StringBuilder sb = new StringBuilder();
-		
-		for (int i : card) {
-			if (hashmap.containsKey(i)) {
-				int value = hashmap.get(i);
-				value++;
-				hashmap.replace(i, value);
-			}
-		}
-		
-		for (int i : check) {
-			sb.append(hashmap.get(i)).append(' ');
+
+		for (int i = 0; i < m; i++) {
+			int check = Integer.parseInt(str.nextToken());
+			sb.append(hashmap.getOrDefault(check, 0)).append(' ');
 		}
 		
 		sb.setLength(sb.length()-1);
