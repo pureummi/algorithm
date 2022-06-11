@@ -13,36 +13,31 @@ public class Q1269 {
 		
 		StringTokenizer str = new StringTokenizer(br.readLine());
 		
-		int[] a = new int[Integer.parseInt(str.nextToken())];
-		int[] b = new int[Integer.parseInt(str.nextToken())];
+		int a = Integer.parseInt(str.nextToken());
+		int b = Integer.parseInt(str.nextToken());
 		
-		Set<Integer> setA = new HashSet<Integer>();
+		Set<Integer> set = new HashSet<Integer>();
 		
 		str = new StringTokenizer(br.readLine());
-		for (int i = 0; i < a.length; i++) {
-			a[i] = Integer.parseInt(str.nextToken());
-			setA.add(a[i]);
+		for (int i = 0; i < a; i++) {
+			set.add(Integer.parseInt(str.nextToken()));
 		}
 		
-		Set<Integer> setB = new HashSet<Integer>();
-		
 		str = new StringTokenizer(br.readLine());
-		for (int i = 0; i < b.length; i++) {
-			b[i] = Integer.parseInt(str.nextToken());
-			setB.add(b[i]);
-			
-			if (setA.contains(b[i])) {
-				setA.remove(b[i]);
+		int cnt = 0;
+		for (int i = 0; i < b; i++) {
+			int num = Integer.parseInt(str.nextToken());
+			if (set.contains(num)) {//중복값을 포함할 경우, cnt 증가
+				cnt++;
+				
+			} else {
+				set.add(num);
 			}
 		}
 		
-		for (int i : a) {
-			if (setB.contains(i)) {
-				setB.remove(i);
-			}
-		}
-		
-		System.out.println(setA.size() + setB.size());
+		//대칭 차집합 개수
+		//집합A 의 개수 a에 중복값 개수 cnt를 뺀 값 + 집합B 의 개수 b에 중복값 개수 cnt를 뺀 값
+		System.out.println((a-cnt) + (b-cnt));
 		
 		br.close();
 	}
