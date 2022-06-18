@@ -25,7 +25,13 @@ public class Q4153 {
 				if ((a*a)+(b*b) == (c*c)) {
 					sb.append("right").append('\n');
 				
-				} else {
+				} else if ((a*a)+(c*c) == (b*b)) {
+					sb.append("right").append('\n');
+				
+				} else if ((b*b)+(c*c) == (a*a)) {
+					sb.append("right").append('\n');
+				
+				}  else {
 					sb.append("wrong").append('\n');
 				}
 			}
