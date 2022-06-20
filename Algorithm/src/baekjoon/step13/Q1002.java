@@ -24,26 +24,31 @@ public class Q1002 {
 			int y2 = Integer.parseInt(str.nextToken());
 			int r2 = Integer.parseInt(str.nextToken());
 			
-			if (Math.abs(x2-x1) + Math.abs(y2-y1) > Math.abs(r1+r2)
-					|| (x1 == x2 && y1 == y2 && r1 != r2)) {
-				sb.append("0").append('\n');
-				
-			} else if (Math.abs(x2-x1) + Math.abs(y2-y1) == Math.abs(r1+r2)
-					|| Math.abs(x2-x1) + Math.abs(y2-y1) == Math.abs(r2-r1)) {
-				sb.append("1").append('\n');
-				
-			} else if (Math.abs(x2-x1) + Math.abs(y2-y1) < Math.abs(r1+r2)) {
-				sb.append("2").append('\n');
-				
-			} else {
-				sb.append("-1").append('\n');
-				
-			}
-			
+			sb.append(point(x1, y1, r1, x2, y2, r2)).append('\n');			
 		}
 		
-		System.out.println(sb);
+		System.out.println(sb.toString().trim());
 		
 		br.close();
 	}
-}
+	
+	public static int point(int x1, int y1, int r1, int x2, int y2, int r2) {
+		int distance = (int) (Math.pow(x2-x1, 2) + Math.pow(y2-y1, 2));
+		
+		if (x1 == x2 && y1 == y2 && r1 == r2) {
+			return -1;
+			
+		} else if (distance > Math.pow(r1+r2, 2)
+				|| distance < Math.pow(r2-r1, 2)) {
+			return 0;
+			
+		} else if (distance == Math.pow(r1+r2, 2)
+				|| distance == Math.pow(r2-r1, 2)) {
+			return 1;
+			
+		} else {
+			return 2;
+			
+		}
+	}
+}	
