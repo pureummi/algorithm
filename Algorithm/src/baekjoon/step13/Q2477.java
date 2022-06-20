@@ -54,15 +54,20 @@ public class Q2477 {
 				if (array[i][0] != 1) {
 					weightM = array[i][1];
 					heightM = array[i-1][1];
-				}
+				} 
 				
 			} else if (array[i-1][0] == 4) {
 				if (array[i][0] != 2) {
 					weightM = array[i][1];
 					heightM = array[i-1][1];
-				}
+				} 
 			}
 			
+		}
+		
+		if (weightM == 0 && heightM == 0) {
+			weightM = array[0][1];
+			heightM = array[5][1];
 		}
 		
 		//ÁøÂ¥ Âü¿Ü¹çÀÇ ³ĞÀÌ = ÀüÃ¼ ¹çÀÇ ³ĞÀÌ - °¡Â¥ ¹çÀÇ ³ĞÀÌ
