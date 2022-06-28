@@ -17,7 +17,7 @@ public class Q2609 {
 		int divisor = 1;
 		int max = 0;
 		
-		while (a > divisor || b > divisor) {
+		while (a >= divisor && b >= divisor) {
 			
 			if (a % divisor == 0 && b % divisor == 0) {
 				max = Math.max(max, divisor);
