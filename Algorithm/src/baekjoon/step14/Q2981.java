@@ -11,11 +11,11 @@ public class Q2981 {
 		int n = Integer.parseInt(br.readLine());
 
 		int[] arr = new int[n];
-		int min = Integer.MAX_VALUE;
+		int max = 0;
 
 		for (int i = 0; i < n; i++) {
 			arr[i] = Integer.parseInt(br.readLine());
-			min = Math.min(min, arr[i]);
+			max = Math.max(max, arr[i]);
 		}
 
 		int idx = 1;
@@ -24,7 +24,7 @@ public class Q2981 {
 
 		StringBuilder sb = new StringBuilder();
 
-		while (idx <= n-1 && divisor <= min) {
+		while (idx <= n-1 && divisor <= max) {
 			int result = arr[0] % divisor;
 			int remainder = arr[idx] % divisor;
 
