@@ -3,6 +3,7 @@ package baekjoon.step14;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class Q2981 {
 	public static void main(String[] args) throws IOException {
@@ -11,45 +12,36 @@ public class Q2981 {
 		int n = Integer.parseInt(br.readLine());
 
 		int[] arr = new int[n];
-		int max = 0;
 
 		for (int i = 0; i < n; i++) {
 			arr[i] = Integer.parseInt(br.readLine());
-			max = Math.max(max, arr[i]);
 		}
 
-		int idx = 1;
-		int divisor = 2;
-		int checkcnt = 0;
-
+		Arrays.sort(arr);
+		
+		int value = arr[1] - arr[0];
+		
+		for (int i = 2; i < arr.length; i++) {
+			value = gcd(value, arr[i] - arr[i-1]);
+		}
+		
 		StringBuilder sb = new StringBuilder();
-
-		while (idx <= n-1 && divisor <= max) {
-			int result = arr[0] % divisor;
-			int remainder = arr[idx] % divisor;
-
-			if (result == remainder) {
-				idx++;
-				checkcnt++;
-				
-			} else {
-				divisor++;
-				checkcnt = 0;
-				idx = 1;
+		
+		for (int i = 2; i <= value; i++) {
+			if (value % i == 0) {
+				sb.append(i).append(' ');
 			}
-
-			if (checkcnt == n-1) {
-				sb.append(divisor).append(' ');
-				divisor++;
-				idx = 1;
-				checkcnt = 0;
-			}
-			
 		}
 		
 		System.out.println(sb);
 		
 		br.close();
 
+	}
+	
+	public static int gcd(int p, int q) {
+		if (q == 0) return p;
+		 
+		return gcd(q, p%q);
 	}
 }
