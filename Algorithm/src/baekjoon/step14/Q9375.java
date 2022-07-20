@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.StringTokenizer;
 
 public class Q9375 {
@@ -36,11 +35,8 @@ public class Q9375 {
 			
 			int result = 1;
 			
-			Iterator<String> keys = map.keySet().iterator();
-			
-			while (keys.hasNext()) {
-				String key = keys.next();
-				result *= (map.get(key) + 1);
+			for (int value : map.values()) {
+				result *= (value+1);
 			}
 			
 			sb.append(result-1).append('\n');
