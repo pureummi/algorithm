@@ -7,8 +7,7 @@ import java.util.StringTokenizer;
 
 public class Q15650 {
 	static int[] arr;
-	static int n;
-	static int m;
+	static int n, m;
 	static StringBuilder sb = new StringBuilder();
 
 	public static void main(String[] args) throws IOException {
@@ -26,7 +25,7 @@ public class Q15650 {
 		System.out.println(sb);
 	}
 
-	static void backtracking(int start ,int idx) {
+	static void backtracking(int start, int idx) {
 		if (idx == m) {
 			for (int i = 0; i < m; i++) {
 				sb.append(arr[i]).append(' ');
@@ -36,10 +35,8 @@ public class Q15650 {
 
 		} else {
 			for (int i = start; i <= n; i++) {
-
 				arr[idx] = i;
-				backtracking(start+1, idx+1);
-
+				backtracking(i+1, idx+1);
 			}
 		}
 	}
